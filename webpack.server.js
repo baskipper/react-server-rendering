@@ -1,5 +1,6 @@
 const path = require('path')
 const merge = require('webpack-merge')
+const webpackNodeExternals = require('webpack-node-externals')
 const baseConfig = require('./webpack.base')
 
 const config = {
@@ -16,7 +17,9 @@ const config = {
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'build')
-    }
+    },
+    // Skip packing any imports that are available in node_modules
+    externals: [webpackNodeExternals()]
 }
 
 module.exports = merge(baseConfig, config)
